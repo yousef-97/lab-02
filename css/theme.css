@@ -1,0 +1,12 @@
+figure{
+    background-color: brown;
+}
+
+
+select#horns {
+    background-color: yellow;
+}
+option:hover{
+    background-color: darkblue;
+}
+
