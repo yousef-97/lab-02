@@ -18,7 +18,7 @@ $.get('../data/page-1.json')
         }
     });    
     $('.content').remove();
-    $('.choose').remove();
+    
 });
 function HornAnimals(title,description,horns,keyword,image_url){
     this.title = title;
@@ -44,11 +44,14 @@ HornAnimals.prototype.renderAll = function(){
 
 }
 $('select').on('change',function(){
+    // $('.choose').hide();
     console.log($(this));
-    console.log($(this).val());
     let selected = $('select option:selected').val();
-    $('figure').hide();
+    
     console.log($('select option:selected').val());
+    $('figure').hide();
+    if (selected === 'default'){$('figure').show();}
+    // console.log($('select option:selected').val());
         $(`.${selected}`).show();
 
 
