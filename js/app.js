@@ -1,6 +1,6 @@
 'use strict';
 const keywordArr = [];
-$.get('../data/page-1.json')
+$.get('./data/page-1.json')
 .then (data=>{
     data.forEach(value=>{
         let newOne = new HornAnimals(value.title,value.description,value.horns,value.keyword,value.image_url);
