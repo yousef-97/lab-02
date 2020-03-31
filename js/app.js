@@ -56,3 +56,4 @@ $('select').on('change',function(){
 
 
 })
+//if there is no value attr in opthtion element the value of value attr gonna be the text inside option element<option>text</option>
