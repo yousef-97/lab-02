@@ -2,13 +2,19 @@ h1{
     font-size: 30px;
 }
 #shown{
-    float: left;
-    margin: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction:row; */
+    /* float: left; */
+    /* margin: 40px; */
 }
 figure{
+    justify-content: space-evenly;
+    /* flex-wrap: wrap; */
+    /* flex-direction:row; */
     padding: 30px;
     border: 3px solid yellow;
-    float: left;
+    /* float: left; */
     margin: 10px 40px;
     width: 250px;
     height: 325px;
