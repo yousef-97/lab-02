@@ -9,37 +9,42 @@
     <link rel="stylesheet" href="css/layouts.css">
     <link rel="stylesheet" href="css/theme.css">
 
+
     <script id='rendertemplate' type='text/x-tmpl-mustache'>
             <figure class="all {{keyword}}">
                 <h3>{{title}}</h3>
                 <img class ="theImg" src="{{image_url}}" alt="{{title}}">
                 <figcaption>{{description}}</figcaption>
             </figure>      
+    </script>
 
+    <script id='optiontemplate' type='text/x-tmpl-mustache'>
+        <option value ="{{keyword}}">{{keyword}}</option>
     </script>
     
 </head>
 <body>
     <header>
-
+        <h1>The Gallery of Horns</h1>
+        <select name="" id="horns">
+            <option value="default" class="choose">Filter by Keyword</option>
+        </select>
     </header>
 
     <main>
-        <div id="page1">
-            <h1>The Gallery of Horns</h1>
-            <select name="" id="horns" aria-placeholder="fillter by key word">
-                <option value="default" class="choose">Filter by Keyword</option>
-            </select>
-
-            <div id="shown">
-                <!-- <figure class="content">
-                    <h3></h3>
-                    <img src="" alt="">
-                    <figcaption></figcaption>
-                </figure> -->
+        <!-- <div> -->
+            <div id="pageschanger">
+                <button id="page1">page1</button>
+                <button id="page2">page2</button>
             </div>
-        </div>
-        <div id="page2"></div>
+            <select name="sort" id="sort">
+                <option value="default">sort by</option>
+                <option value="numhorn">#of horns</option>
+                <option value="title">title</option>
+            </select>
+            <div id="shown"></div>
+        <!-- </div> -->
+        <div ></div>
     </main>
 
     <footer>
