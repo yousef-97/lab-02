@@ -1,6 +1,6 @@
 'use strict';
 $(document).ready(function() {
-const keywordArr = [];
+let keywordArr = [];
 let dataOfHorns = [];
 
 // default calling
@@ -12,8 +12,10 @@ function everyThing(theFile){
         data.forEach(value=>{
             let newOne = new HornAnimals(value.title,value.description,value.horns,value.keyword,value.image_url);
             newOne.renderAll();
-        });    
+        }); 
+        console.log(sortByKeyAsc(dataOfHorns,'horns'));
     });
+    hello();
 }   
 
 function HornAnimals(title,description,horns,keyword,image_url){
@@ -24,7 +26,6 @@ function HornAnimals(title,description,horns,keyword,image_url){
     this.image_url = image_url;
     dataOfHorns.push(this);
 }
-console.log(dataOfHorns);
 
 HornAnimals.prototype.renderAll = function(){
     //template for rendering the images
@@ -45,64 +46,73 @@ HornAnimals.prototype.renderAll = function(){
 
 
 
-
+let shown;
 $('#horns').on('change',function(){
+    
     console.log($(this));
     let selected = $('#horns option:selected').val();
     // console.log($('select option:selected').val());
     $('.all').hide();
     if (selected === 'default'){$('.all').show();}
     // console.log($('select option:selected').val());
-        $(`.${selected}`).show();
-        $('#horns').prop('selectedIndex',0);
+    $(`.${selected}`).show();
+    shown = selected;
+    console.log(shown);
+    // $('#horns').prop('selectedIndex',0);
 //if there is no value attr in opthtion element the value of value attr gonna be the text inside option element<option>text</option>
 })
 
 
 
 
-//on click function
-$('#pageschanger').on('click',function(e){
-    console.log(this);
-    let targeting = e.target.id;
-    console.log(e.target.id);
-    switch (true) {
-        case targeting==='page1':
-            $('.all').remove();
-            dataOfHorns= [];
-            everyThing('data/page-1.json');
-                break;
-        
-            case targeting==='page2':
-                dataOfHorns= [];
+//on click function for fillter
+$('.button').on('click',function(){
+    let bId = $(this).attr('id');
+    $('.all').remove();
+    dataOfHorns= [];
+    $('#horns').empty();
+    keywordArr = [];
+    everyThing(`data/${bId}.json`);
+})
+
+
+
+let newArr =[];
+function hello(){
+    $('#sort').on('change',function(){
+        let selected = $('#sort option:selected').val();
+        console.log(selected);
+            sortByKeyAsc(dataOfHorns, selected);
+            // renderAfterSorting(dataOfHorns);
                 $('.all').remove();
-                everyThing('data/page-2.json');
-                break;
-        }
+                dataOfHorns.forEach(val=>{
+                    val.renderAll();
+                   
+                })
+                if(shown){
+                    // $(`.${shown}`).show();
+                     
+                     $('.all').hide();
+                     $(`.${shown}`).show();
+                     console.log(shown);
+                }
+                if(shown==='default'){
+                    $('.all').show();
+                }
+            
     });
-
-
-function sortingTitle (array,key){
-    return array.sort(function(a,b){
-        let i =a[key];
-        let j =b[key];
-        console.log(1);
-        return((i < j) ? 1 :(i > j) ? -1 :0);
-    });
-    
 }
 
-// function sortingTitle (array,key){
-    let array = [1,4,3,7,33,45,3,22,12]
-    array.sort(function(a,b){
-        let i =a;
-        let j =b;
-        console.log(1);
-        return((i < j) ? -1 :(i > j) ? 1 :0);
-    });
-    
-// }
-console.log(array);
-console.log(sortingTitle(dataOfHorns,"horns"));
 
+    function sortByKeyAsc(array, key) {
+        // console.log(array);
+        array.sort(function (a, b) {
+            // console.log('hi');
+            var x = a[key];
+             var y = b[key];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+        
+
+    }
 });
