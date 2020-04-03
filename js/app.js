@@ -26,7 +26,6 @@ function HornAnimals(title,description,horns,keyword,image_url){
     this.image_url = image_url;
     dataOfHorns.push(this);
 }
-// console.log(dataOfHorns);
 
 HornAnimals.prototype.renderAll = function(){
     //template for rendering the images
@@ -47,8 +46,9 @@ HornAnimals.prototype.renderAll = function(){
 
 
 
-let shown =[];
+let shown;
 $('#horns').on('change',function(){
+    
     console.log($(this));
     let selected = $('#horns option:selected').val();
     // console.log($('select option:selected').val());
@@ -56,7 +56,8 @@ $('#horns').on('change',function(){
     if (selected === 'default'){$('.all').show();}
     // console.log($('select option:selected').val());
     $(`.${selected}`).show();
-    shown.push(selected);
+    shown = selected;
+    console.log(shown);
     // $('#horns').prop('selectedIndex',0);
 //if there is no value attr in opthtion element the value of value attr gonna be the text inside option element<option>text</option>
 })
@@ -76,17 +77,29 @@ $('.button').on('click',function(){
 
 
 
-
+let newArr =[];
 function hello(){
     $('#sort').on('change',function(){
         let selected = $('#sort option:selected').val();
         console.log(selected);
             sortByKeyAsc(dataOfHorns, selected);
             // renderAfterSorting(dataOfHorns);
-            $('.all').remove();
-            dataOfHorns.forEach(val=>{
-                val.renderAll();
-            })
+                $('.all').remove();
+                dataOfHorns.forEach(val=>{
+                    val.renderAll();
+                   
+                })
+                if(shown){
+                    // $(`.${shown}`).show();
+                     
+                     $('.all').hide();
+                     $(`.${shown}`).show();
+                     console.log(shown);
+                }
+                if(shown==='default'){
+                    $('.all').show();
+                }
+            
     });
 }
 
