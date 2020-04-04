@@ -13,7 +13,8 @@ function everyThing(theFile){
             let newOne = new HornAnimals(value.title,value.description,value.horns,value.keyword,value.image_url);
             newOne.renderAll();
         }); 
-        console.log(sortByKeyAsc(dataOfHorns,'horns'));
+        // sortByKeyAsc(dataOfHorns,'horns');
+        // console.log(dataOfHorns);
     });
     hello();
 }   
@@ -49,7 +50,7 @@ HornAnimals.prototype.renderAll = function(){
 let shown;
 $('#horns').on('change',function(){
     
-    console.log($(this));
+    // console.log($(this));
     let selected = $('#horns option:selected').val();
     // console.log($('select option:selected').val());
     $('.all').hide();
@@ -57,7 +58,7 @@ $('#horns').on('change',function(){
     // console.log($('select option:selected').val());
     $(`.${selected}`).show();
     shown = selected;
-    console.log(shown);
+    // console.log(shown);
     // $('#horns').prop('selectedIndex',0);
 //if there is no value attr in opthtion element the value of value attr gonna be the text inside option element<option>text</option>
 })
@@ -67,21 +68,23 @@ $('#horns').on('change',function(){
 
 //on click function for fillter
 $('.button').on('click',function(){
+    shown = 'default';
     let bId = $(this).attr('id');
     $('.all').remove();
     dataOfHorns= [];
     $('#horns').empty();
+    $('#horns').append('<option value="default" class="choose">Filter by Keyword</option>');
     keywordArr = [];
     everyThing(`data/${bId}.json`);
 })
 
 
 
-let newArr =[];
+// let newArr =[];
 function hello(){
     $('#sort').on('change',function(){
         let selected = $('#sort option:selected').val();
-        console.log(selected);
+        // console.log(selected);
             sortByKeyAsc(dataOfHorns, selected);
             // renderAfterSorting(dataOfHorns);
                 $('.all').remove();
@@ -89,12 +92,10 @@ function hello(){
                     val.renderAll();
                    
                 })
-                if(shown){
-                    // $(`.${shown}`).show();
-                     
+                if(shown){                     
                      $('.all').hide();
                      $(`.${shown}`).show();
-                     console.log(shown);
+                    //  console.log(shown);
                 }
                 if(shown==='default'){
                     $('.all').show();
@@ -107,12 +108,14 @@ function hello(){
     function sortByKeyAsc(array, key) {
         // console.log(array);
         array.sort(function (a, b) {
-            // console.log('hi');
+            
             var x = a[key];
              var y = b[key];
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
         
-
+        // console.log(dataOfHorns);
     }
+    sortByKeyAsc(dataOfHorns, 'title');//its not work IDK WHY ITS MAKE ME CRAZY AHHHHH
+    console.log(dataOfHorns);
 });
